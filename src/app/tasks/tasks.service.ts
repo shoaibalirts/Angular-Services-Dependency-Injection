@@ -5,7 +5,8 @@ import { Task } from './task.model';
   providedIn: 'root',
 })
 export class TasksService {
-  tasks = signal<Task[]>([]);
+  private tasks = signal<Task[]>([]);
+  allTasks = this.tasks.asReadonly(); // we want to protect it to change the data from outside (component)
   addTask(taskData: { title: string; description: string }) {
     const newTask: Task = {
       ...taskData,
